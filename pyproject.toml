@@ -10,6 +10,7 @@ dependencies = [
     "apache-airflow-providers-mysql==6.3.3",
     "bentoml==1.4.19",
     "catboost==1.2.8",
+    "fastapi==0.116.1",
     "locust==2.39.0",
     "mlflow==3.2.0",
     "mysqlclient==2.2.7",

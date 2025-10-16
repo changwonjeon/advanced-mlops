@@ -31,11 +31,14 @@ with DAG(
     task1 = BashOperator(
         task_id="print_date",
         # TODO: 현재 시간을 출력하는 bash_command 입력
+        bash_command="date",
     )
     task2 = BashOperator(
         task_id="sleep",
         depends_on_past=False,
         # TODO: 5초 sleep하는 bash_command를 입력하고 3회 재시도하도록 설정
+        bash_command="sleep 5",
+        retries=3,        
     )
 
     loop_command = dedent(
