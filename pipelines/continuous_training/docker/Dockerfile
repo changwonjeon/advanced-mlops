@@ -3,6 +3,8 @@ LABEL maintainer="otzslayer@gmail.com"
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 ARG USER_HOME=/home/codespace
+
+# 모든 경로는 프로젝트 루드 폴더를 기준으로 생각 (주의! '=' 뒤로 공백없도록)
 ARG UTIL_PATH=utils
 ARG PREPROCESSING_PATH=pipelines/continuous_training/data_preprocessing
 ARG REQUIREMENTS_PATH=pipelines/continuous_training/docker
@@ -14,10 +16,10 @@ RUN groupadd --gid 1000 codespace \
 COPY --chown=codespace:codespace ${UTIL_PATH}/ ${USER_HOME}/utils
 COPY --chown=codespace:codespace ${PREPROCESSING_PATH}/preprocessor.py \
     ${USER_HOME}/data_preprocessing/
-COPY --chown=codespace:codespace ${TRAINING_PATH}/trainer.py \
-    ${USER_HOME}/training/
 COPY --chown=codespace:codespace ${REQUIREMENTS_PATH}/requirements.txt \
     ${USER_HOME}/
+COPY --chown=codespace:codespace ${TRAINING_PATH}/trainer.py \
+    ${USER_HOME}/training/
 
 USER codespace
 WORKDIR ${USER_HOME}
